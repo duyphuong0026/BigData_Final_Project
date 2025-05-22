@@ -1,0 +1,17 @@
+CREATE DATABASE IF NOT EXISTS sale_db;
+USE sale_db;
+
+CREATE TABLE IF NOT EXISTS sales (sale_id INT, product_name STRING, quantity INT, price DOUBLE, sale_date STRING, payment_method INT)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+CREATE TABLE IF NOT EXISTS payment_methods (payment_method_id INT, method_name STRING)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+LOAD DATA LOCAL INPATH '/home/hadoop/sales_data.txt' OVERWRITE INTO TABLE sales;
+LOAD DATA LOCAL INPATH '/home/hadoop/payment_data.txt' OVERWRITE INTO TABLE payment_methods;
